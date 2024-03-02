@@ -10,4 +10,5 @@ The library is used to test C# application. Primary resolves business cases. Hel
 
 The library uses [Bogus library](https://github.com/bchavez/Bogus)
 
+---
 
