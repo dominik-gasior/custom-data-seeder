@@ -8,7 +8,10 @@ The library is used to test C# application. Primary resolves business cases. Hel
 - [ ] fetch data from .csv files and generate objects
 - [ ] can seed local/test database
 
-The library uses [Bogus library](https://github.com/bchavez/Bogus)
+The library uses:
+- [Bogus library](https://github.com/bchavez/Bogus)
+- [Newtonsoft.json](https://www.newtonsoft.com/json)
 
 ---
 
+The library will be available on nuget.org
