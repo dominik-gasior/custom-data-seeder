@@ -17,3 +17,7 @@ The library uses:
 The library will be available on nuget.org
 
 Support formats data: **json**, **csv**
+
+## Basic usage:
+
+
