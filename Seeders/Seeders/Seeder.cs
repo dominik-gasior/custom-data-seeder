@@ -49,6 +49,8 @@ public static class Seeder
         
         using StreamReader reader = new StreamReader(stream ?? throw new MissingManifestResourceException());
         var result = JsonConvert.DeserializeObject<T>(reader.ReadToEnd());
+        // added better exception handling and will also add to return faker object.
+        // one big static object which will be used in all seeder methods.
         return result ?? throw new ArgumentNullException();
     }
 
