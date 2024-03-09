@@ -1,58 +1,25 @@
-﻿using System.Reflection;
-using System.Resources;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using AssemblyExtensions = Seeders.Extensions.AssemblyExtensions;
 
 namespace Seeders;
 
-public static class Seeder
+public class Seeder
 {
+    private readonly JsonSerializerSettings _jsonSerializerSettings;
+
+    public Seeder(JsonSerializerSettings jsonSerializerSettings)
+    {
+        _jsonSerializerSettings = jsonSerializerSettings;
+    }
     // - all data can manipulate with using faker library.
     
     // - fetch data from json from solution with using reflection and then generate object with using mapping mechanism.
-    
-    public static T FromJson<T>(
-        string folderName = "",
-        string fileName = nameof(T))
-        where T : class
-    {
-        string[] existResources = Assembly.GetCallingAssembly().GetManifestResourceNames();
-        
-        string? resource = null;
 
-        if (!string.IsNullOrEmpty(folderName))
-        {
-            folderName = "." + folderName + ".";
-            foreach (var existResource in existResources)
-                if (existResource.Contains(fileName) &&
-                    existResource.Contains(folderName))
-                {
-                    resource = existResource;
-                    break;
-                }
-        }
-        else
-        {
-            foreach (var existResource in existResources)
-                if (existResource.Contains(fileName))
-                {
-                    resource = existResource;
-                    break;
-                }
-        }
-        
-        if (string.IsNullOrEmpty(resource))
-            throw new ArgumentException("Resource not found. Check file name.");
-        
-        Assembly assembly = Assembly.GetCallingAssembly();
-        
-        using Stream stream = assembly.GetManifestResourceStream(resource)!;
-        
-        using StreamReader reader = new StreamReader(stream ?? throw new MissingManifestResourceException());
-        var result = JsonConvert.DeserializeObject<T>(reader.ReadToEnd());
-        // added better exception handling and will also add to return faker object.
-        // one big static object which will be used in all seeder methods.
-        return result ?? throw new ArgumentNullException();
-    }
+    public T FromJson<T>(
+        string folderName = "",
+        string fileName = nameof(T)) 
+        where T : class
+        => Deserialize<T>(AssemblyExtensions.GetResource(fileName, folderName));
 
     // - fetch data from csv from solution with using reflection and then generate object with using mapping mechanism.
 
@@ -61,4 +28,9 @@ public static class Seeder
     // - mechanism for generate random data to test database
 
     // - also can be used data from other sources like api, external repository, etc. (if our data have a big size)
+    
+    private T Deserialize<T>(string resource)
+        => JsonConvert.DeserializeObject<T>(resource, _jsonSerializerSettings) ??
+           throw new ArgumentNullException();
+    
 }
