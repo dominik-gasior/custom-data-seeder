@@ -41,16 +41,6 @@ internal static class AssemblyExtensions
         return resource;
     } 
     
-    internal static string GetResource(string resource)
-    {
-        Assembly assembly = Assembly.GetCallingAssembly();
-        
-        using Stream stream = assembly.GetManifestResourceStream(resource)!;
-        
-        using StreamReader reader = new StreamReader(stream ?? throw new MissingManifestResourceException());
-        return reader.ReadToEnd();
-    }
-    
     private static bool HasDuplicates(IEnumerable<string> list)
     {
         var hashSet = new HashSet<string>();
