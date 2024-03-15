@@ -18,7 +18,7 @@ The library will be available on nuget.org
 
 Support formats data: **json**, **csv**
 
-## Basic usage:
-
-
-
+Milestones:
+- [ ] create seed object from json
+- [ ] create seed object from csv
+- [ ] create seed object from repository
