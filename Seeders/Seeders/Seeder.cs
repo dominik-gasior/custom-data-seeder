@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Reflection;
+using Newtonsoft.Json;
 using AssemblyExtensions = Seeders.Extensions.AssemblyExtensions;
 
 namespace Seeders;
@@ -6,10 +7,12 @@ namespace Seeders;
 public class Seeder
 {
     private readonly JsonSerializerSettings _jsonSerializerSettings;
+    internal static Assembly _callingAssembly;
 
     public Seeder(JsonSerializerSettings jsonSerializerSettings)
     {
         _jsonSerializerSettings = jsonSerializerSettings;
+        _callingAssembly = Assembly.GetCallingAssembly();
     }
     // - all data can manipulate with using faker library.
     
@@ -17,9 +20,9 @@ public class Seeder
 
     public T FromJson<T>(
         string folderName = "",
-        string fileName = nameof(T)) 
+        string? fileName = null) 
         where T : class
-        => Deserialize<T>(AssemblyExtensions.GetResource(fileName, folderName));
+        => Deserialize<T>(AssemblyExtensions.GetResource(fileName ?? typeof(T).Name, folderName));
 
     // - fetch data from csv from solution with using reflection and then generate object with using mapping mechanism.
 
@@ -32,5 +35,5 @@ public class Seeder
     private T Deserialize<T>(string resource)
         => JsonConvert.DeserializeObject<T>(resource, _jsonSerializerSettings) ??
            throw new ArgumentNullException();
-    
+    // todo write custom exception
 }

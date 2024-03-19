@@ -1,16 +1,10 @@
-using System.Reflection;
-using System.Resources;
-
 namespace Seeders.Extensions;
 
 internal static class AssemblyExtensions
 {
     internal static string GetResource(string fileName, string? folderName = null)
     {
-        string[] existResources = Assembly.GetCallingAssembly().GetManifestResourceNames();
-
-        if (HasDuplicates(existResources))
-            throw new ArgumentException("Resource names must be unique. Check file name.");
+        string[] existResources = Seeder._callingAssembly.GetManifestResourceNames();
         
         string? resource = null;
 
@@ -27,6 +21,9 @@ internal static class AssemblyExtensions
         }
         else
         {
+            if (HasDuplicates(existResources))
+                throw new ArgumentException("Resource names must be unique. Check file name.");
+            
             foreach (var existResource in existResources)
                 if (existResource.Contains(fileName))
                 {
@@ -37,8 +34,8 @@ internal static class AssemblyExtensions
         
         if (string.IsNullOrEmpty(resource))
             throw new ArgumentException("Resource not found. Check file name.");
-        
-        return resource;
+
+        return StreamExtensions.FetchDataFromStream(resource);
     } 
     
     private static bool HasDuplicates(IEnumerable<string> list)
