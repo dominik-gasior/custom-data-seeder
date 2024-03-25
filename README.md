@@ -22,4 +22,3 @@ Milestones:
 - [ ] create seed object from json
 - [ ] create seed object from csv
 - [ ] create seed object from repository
-
