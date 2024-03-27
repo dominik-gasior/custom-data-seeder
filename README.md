@@ -19,13 +19,6 @@ The library will be available on nuget.org
 Support formats data: **json**, **csv**
 
 Milestones:
-<<<<<<< Updated upstream
-- [ ] create seed object from json
-- [ ] create seed object from csv
-- [ ] create seed object from repository
-
-=======
 - [x] create seed object and objects from json
 - [ ] create seed object and objects from csv
 - [ ] create seed object and objects from repository
->>>>>>> Stashed changes
