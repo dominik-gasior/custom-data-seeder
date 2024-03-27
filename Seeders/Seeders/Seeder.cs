@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Bogus;
 using Newtonsoft.Json;
 using AssemblyExtensions = Seeders.Extensions.AssemblyExtensions;
 
@@ -16,13 +17,24 @@ public class Seeder
     }
     // - all data can manipulate with using faker library.
     
-    // - fetch data from json from solution with using reflection and then generate object with using mapping mechanism.
-
     public T FromJson<T>(
         string folderName = "",
-        string? fileName = null) 
+        string? fileName = null)
         where T : class
-        => Deserialize<T>(AssemblyExtensions.GetResource(fileName ?? typeof(T).Name, folderName));
+    {
+        Type type = typeof(T);
+
+        if (type.GenericTypeArguments.Length == 0)
+            return DeserializeToObject<T>(AssemblyExtensions.GetResource(fileName ?? typeof(T).Name, folderName));
+        
+        return DeserializeToObjects<T>(AssemblyExtensions.GetResource(fileName ?? type.GenericTypeArguments[0].Name, folderName));
+    }
+    
+    public Faker<T> FromJsonToFaker<T>(
+        string folderName = "",
+        string? fileName = null)
+        where T : class
+        => new Faker<T>().CustomInstantiator(_ => FromJson<T>(folderName, fileName));
 
     // - fetch data from csv from solution with using reflection and then generate object with using mapping mechanism.
 
@@ -32,8 +44,11 @@ public class Seeder
 
     // - also can be used data from other sources like api, external repository, etc. (if our data have a big size)
     
-    private T Deserialize<T>(string resource)
+    private T DeserializeToObject<T>(string resource)
         => JsonConvert.DeserializeObject<T>(resource, _jsonSerializerSettings) ??
            throw new ArgumentNullException();
-    // todo write custom exception
+    
+    private T DeserializeToObjects<T>(string resource)
+        => JsonConvert.DeserializeObject<T>(resource, _jsonSerializerSettings) ??
+           throw new ArgumentNullException();
 }

@@ -1,5 +1,7 @@
-{
-  "CompanyName" : "BMW",
-  "Series": "3",
-  "Model": "2019"
-}
+[
+  {
+    "CompanyName" : "BMW",
+    "Series": "3",
+    "Model": "2019"
+  }
+]
