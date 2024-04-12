@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeedersTest", "SeedersTest.csproj", "{917C8E3E-9BC5-4CB7-9719-18824F5397FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seeders", "..\Seeders\Seeders\Seeders.csproj", "{5EAA234D-D12B-4A08-AC62-87B12F3D6531}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{917C8E3E-9BC5-4CB7-9719-18824F5397FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{917C8E3E-9BC5-4CB7-9719-18824F5397FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{917C8E3E-9BC5-4CB7-9719-18824F5397FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{917C8E3E-9BC5-4CB7-9719-18824F5397FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EAA234D-D12B-4A08-AC62-87B12F3D6531}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EAA234D-D12B-4A08-AC62-87B12F3D6531}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EAA234D-D12B-4A08-AC62-87B12F3D6531}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EAA234D-D12B-4A08-AC62-87B12F3D6531}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

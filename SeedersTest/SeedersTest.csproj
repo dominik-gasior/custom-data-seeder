@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    </PropertyGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\Seeders\Seeders\Seeders.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <None Remove="Json2\Car.json" />
+      <EmbeddedResource Include="Json2\Car.json" />
+      <None Remove="Json\Car.json" />
+      <EmbeddedResource Include="Json\Car.json" />
+    </ItemGroup>
+
+</Project>
