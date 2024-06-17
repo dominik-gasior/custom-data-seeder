@@ -13,4 +13,4 @@ The library uses:
 
 ---
 
-Support formats data: **json**, **csv**
+Support formats data: **json**
